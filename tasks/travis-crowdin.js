@@ -29,8 +29,12 @@ module.exports = function(grunt) {
 					const zipPipe = api.downloadAllTranslations(project).pipe(unzip.Parse());
 					zipPipe.on('entry', function(entry) {
 						if (entry.type === 'File') {
-							const locale = entry.path.split('/')[0];
-							entry.pipe(fs.createWriteStream(path.join(localesFolder, locale + '.json')));
+							const splitPath = entry.path.split('/')
+							const locale = splitPath[0];
+							const name = splitPath[1];
+							if (name === filename + '.json') {
+								entry.pipe(fs.createWriteStream(path.join(localesFolder, locale + '.json')));
+							}
 						} else {
 							entry.autodrain();
 						}
