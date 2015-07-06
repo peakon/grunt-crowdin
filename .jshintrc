@@ -1,0 +1,21 @@
+{
+	"predef": [ "-Promise" ],
+	"esnext": true,
+	"node": true,
+	"unused": "vars",
+	"undef": true,
+    "eqeqeq": true,
+    "eqnull": true,
+    "expr": true,
+    "latedef": "nofunc",
+    "onevar": true,
+    "noarg": true,
+    "trailing": true,
+    "quotmark": "single",
+    "undef": true,
+    "forin": true,
+    "freeze": true,
+    "nonbsp": true,
+    "nonew": true,
+    "shadow": true
+}

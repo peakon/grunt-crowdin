@@ -1,0 +1,29 @@
+{
+  "name": "grunt-crowdin",
+  "version": "1.0.0",
+  "description": "Update and export translations from Crowdin",
+  "author": {
+    "name": "Peakon Team",
+    "url": "http://peakon.com/"
+  },
+  "repository": "peakon/grunt-crowdin",
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "dependencies": {
+    "bluebird": "^2.9.32",
+    "crowdin-api": "^1.0.1",
+    "unzip": "^0.1.11"
+  },
+  "peerDependencies": {
+    "grunt": ">=0.4.0"
+  },
+  "keywords": [
+    "gruntplugin",
+    "crowdin"
+  ],
+  "files": [
+    "tasks"
+  ]
+}
