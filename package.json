@@ -1,6 +1,6 @@
 {
   "name": "grunt-crowdin",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Update and export translations from Crowdin",
   "author": {
     "name": "Peakon Team",
