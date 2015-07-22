@@ -40,7 +40,7 @@ function download(project, localesFolder, filename, sourceLocale) {
 
 									const mergedTranslations = _.merge(JSON.parse(data), updatedTranslations);
 
-									fs.writeFile(targetFile, JSON.stringify(mergedTranslations, null, 2), 'utf8');
+									fs.writeFile(targetFile, JSON.stringify(mergedTranslations, null, 4), 'utf8');
 								});
 							});
 						} else {
