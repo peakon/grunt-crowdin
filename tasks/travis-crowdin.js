@@ -20,35 +20,39 @@ function download(project, localesFolder, filename, sourceLocale) {
 		return Promise.fromNode(function(callback) {
 			const zipPipe = api.downloadAllTranslations(project).pipe(unzip.Parse());
 			zipPipe.on('entry', function(entry) {
-				if (entry.type === 'File') {
-					const splitPath = entry.path.split('/');
-					const locale = splitPath[0];
-					const name = splitPath[1];
-
-					if (name === filename + '.json') {
-						const targetFile = path.join(localesFolder, locale + '.json');
-
-						if (locale === sourceLocale) {
-							//We must merge the source translation with the updated translations
-							const localeBuffer = new streamBuffers.WritableStreamBuffer();
-
-							entry.pipe(localeBuffer).on('close', function() {
-								const updatedTranslations = JSON.parse(localeBuffer.getContentsAsString('utf8'));
-
-								fs.readFile(targetFile, 'utf8', function(err, data) {
-									if (err) return callback(err);
-
-									const mergedTranslations = _.merge(JSON.parse(data), updatedTranslations);
-
-									fs.writeFile(targetFile, JSON.stringify(mergedTranslations, null, 4), 'utf8');
-								});
-							});
-						} else {
-							entry.pipe(fs.createWriteStream(path.join(localesFolder, locale + '.json')));
-						}
-					}
-				} else {
+				if (entry.type !== 'File') {
 					entry.autodrain();
+					return;
+				}
+
+				const splitPath = entry.path.split('/');
+				const locale = splitPath[0];
+				const name = splitPath[1];
+
+				if (name !== filename + '.json') {
+					entry.autodrain();
+					return;
+				}
+
+				const targetFile = path.join(localesFolder, locale + '.json');
+
+				if (locale === sourceLocale) {
+					//We must merge the source translation with the updated translations
+					const localeBuffer = new streamBuffers.WritableStreamBuffer();
+
+					entry.pipe(localeBuffer).on('close', function() {
+						const updatedTranslations = JSON.parse(localeBuffer.getContentsAsString('utf8'));
+
+						fs.readFile(targetFile, 'utf8', function(err, data) {
+							if (err) return callback(err);
+
+							const mergedTranslations = _.merge(JSON.parse(data), updatedTranslations);
+
+							fs.writeFile(targetFile, JSON.stringify(mergedTranslations, null, 2), 'utf8');
+						});
+					});
+				} else {
+					entry.pipe(fs.createWriteStream(path.join(localesFolder, locale + '.json')));
 				}
 			}).on('close', callback).on('error', callback);
 		});
