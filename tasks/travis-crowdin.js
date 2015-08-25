@@ -11,6 +11,7 @@ const _ = require('lodash');
 function upload(project, localesFolder, filename, sourceLocale) {
 	const options = {};
 	options['files[' + filename + '.json]'] = fs.createReadStream(path.join(localesFolder, sourceLocale + '.json'));
+	options.update_option = 'update_as_unapproved';
 
 	return api.updateFile(project, [], options);
 }
