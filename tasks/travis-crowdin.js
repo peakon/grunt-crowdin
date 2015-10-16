@@ -53,9 +53,7 @@ function download(project, localesFolder, filename, sourceLocale) {
 						});
 					});
 				} else {
-					const formattedLocale = locale.replace('-', '_');
-
-					entry.pipe(fs.createWriteStream(path.join(localesFolder, formattedLocale + '.json')));
+					entry.pipe(fs.createWriteStream(path.join(localesFolder, locale + '.json')));
 				}
 			}).on('close', callback).on('error', callback);
 		});
