@@ -1,0 +1,19 @@
+{
+  "lineBreak": {
+    "before": {
+      "AssignmentExpression": ">=0",
+      "FunctionExpressionClosingBrace": "<=1",
+      "FunctionDeclarationClosingBrace": "<=1"
+    },
+    "after": {
+      "IfStatement": ">=0",
+      "FunctionExpressionOpeningBrace": "<=1",
+      "FunctionDeclarationOpeningBrace": "<=1"
+    }
+  },
+  "whiteSpace": {
+    "after": {
+      "FunctionReservedWord": 1
+    }
+  }
+}
