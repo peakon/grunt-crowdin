@@ -27,5 +27,8 @@
   ],
   "files": [
     "tasks"
-  ]
+  ],
+  "devDependencies": {
+    "grunt-release": "^0.13.1"
+  }
 }
