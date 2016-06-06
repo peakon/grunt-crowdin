@@ -20,7 +20,8 @@ function download(project, localesFolder, filename, sourceLocale) {
   return api.exportTranslations(project).then(function () {
     return Promise.fromNode(function (callback) {
       const zipPipe = api.downloadAllTranslations(project).pipe(unzip.Parse());
-      zipPipe.on('entry', function (entry) {
+      zipPipe
+      .on('entry', function (entry) {
         if (entry.type !== 'File') {
           entry.autodrain();
           return;
@@ -41,7 +42,7 @@ function download(project, localesFolder, filename, sourceLocale) {
           // We must merge the source translation with the updated translations
           const localeBuffer = new streamBuffers.WritableStreamBuffer();
 
-          entry.pipe(localeBuffer).on('close', function () {
+          entry.on('end', function () {
             const updatedTranslations = JSON.parse(localeBuffer.getContentsAsString('utf8'));
 
             fs.readFile(targetFile, 'utf8', function (err, data) {
@@ -51,11 +52,14 @@ function download(project, localesFolder, filename, sourceLocale) {
 
               fs.writeFile(targetFile, JSON.stringify(mergedTranslations, null, 4), 'utf8');
             });
-          });
+          })
+            .pipe(localeBuffer);
         } else {
           entry.pipe(fs.createWriteStream(path.join(localesFolder, locale + '.json')));
         }
-      }).on('close', callback).on('error', callback);
+      })
+        .on('end', callback)
+        .on('error', callback);
     });
   });
 }
