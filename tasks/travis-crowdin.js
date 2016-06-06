@@ -58,7 +58,7 @@ function download(project, localesFolder, filename, sourceLocale) {
           entry.pipe(fs.createWriteStream(path.join(localesFolder, locale + '.json')));
         }
       })
-        .on('end', callback)
+        .on('close', callback)
         .on('error', callback);
     });
   });
