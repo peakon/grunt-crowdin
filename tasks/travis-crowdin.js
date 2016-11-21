@@ -29,7 +29,7 @@ function download(project, localesFolder, filename, sourceLocale) {
 
         const splitPath = entry.path.split('/');
         const locale = splitPath[0];
-        const name = splitPath[1];
+        const name = splitPath.splice(1, splitPath.length).join('/');
 
         if (name !== filename + '.json') {
           entry.autodrain();
