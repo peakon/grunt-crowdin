@@ -1,5 +1,7 @@
 # grunt-travis-restart
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/peakon/grunt-crowdin.svg)](https://greenkeeper.io/)
+
 Task to upload and download translations from [Crowdin](https://crowdin.com). The translation files must be in json format.
 
 ## Getting Started
