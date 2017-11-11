@@ -80,7 +80,6 @@ module.exports = function (grunt) {
     try {
       const localesFolder = path.join(process.cwd(), folder);
 
-      let taskPromise;
       if (target === 'upload') {
         await upload(api, project, localesFolder, filename, sourceLocale);
       } else if (target === 'download') {

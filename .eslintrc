@@ -6,9 +6,6 @@
     "arrow-parens": [2, "as-needed"],
     "no-extra-semi": 2
   },
-  "ecmaFeatures": {
-    "blockBindings": true
-  },
   "env": {
     "browser": true,
     "amd": true,

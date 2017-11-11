@@ -15,7 +15,7 @@
     "node": ">=0.10.0"
   },
   "dependencies": {
-    "bluebird": "^3.5.0",
+    "bluebird": "^3.5.1",
     "crowdin-api": "^2.0.2",
     "load-grunt-config": "^0.19.2",
     "lodash": "^4.17.4",
@@ -34,7 +34,7 @@
   ],
   "devDependencies": {
     "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
