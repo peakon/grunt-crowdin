@@ -1,5 +1,5 @@
 {
-  "name": "grunt-crowdin",
+  "name": "@peakon/grunt-crowdin",
   "version": "1.2.1",
   "description": "Update and export translations from Crowdin",
   "author": {
