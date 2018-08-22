@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "bluebird": "^3.5.1",
-    "crowdin-api": "^2.0.2",
+    "crowdin-api": "^2.0.3",
     "load-grunt-config": "^0.19.2",
     "lodash": "^4.17.4",
     "stream-buffers": "^3.0.1",
