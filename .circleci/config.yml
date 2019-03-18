@@ -1,34 +1,78 @@
 version: 2
+aliases:
+  - &docker_image
+     - image: library/node:11.6.0
+
+  - &restore_npm_cache
+    keys:
+      - npm-cache-{{ checksum "package.json" }}
+
+  - &save_npm_cache
+    key: npm-cache-{{ checksum "package.json" }}
+    paths:
+      - ./node_modules
+
+  - &store_junit_results
+    path: junit
+
+  - &store_junit_artifacts
+    path: junit
+
+  - &update_path
+    name: Update PATH and Define Environment Variable at Runtime
+    command: |
+      echo 'export PATH=~/project/node_modules/.bin:$PATH' >> $BASH_ENV
+      source $BASH_ENV
+
+  - &npm_install
+    name: NPM Install
+    command: |
+      npm install --no-audit -d
+
 jobs:
   build:
-    parallelism: 1
-
-    docker:
-    - image: library/node:8.2.1
-
-    branches:
-      ignore:
-        - /^v[0-9]/
-
+    docker: *docker_image
+    environment:
+      MOCHA_FILE: junit/test-results.xml
     steps:
-    - checkout
-    - restore_cache:
-        key: npm-cache-{{ checksum "package.json" }}
-    - run: docker/scripts/retry_and_backoff.sh npm install
-    - save_cache:
-        key: npm-cache-{{ checksum "package.json" }}
-        paths:
-          - ./node_modules
-    - run:
-        name: Update PATH and Define Environment Variable at Runtime
-        command: |
-          echo 'export PATH=~/project/node_modules/.bin:$PATH' >> $BASH_ENV
-          source $BASH_ENV
-    - run: npm test
+      - checkout
+      - run: *update_path
+      - restore_cache: *restore_npm_cache
+      - run: *npm_install
+      - save_cache: *save_npm_cache
+      - run: *update_path
+      - run: npm test
+      - run: npm run lint
+      - store_test_results: *store_junit_results
+      - store_artifacts: *store_junit_artifacts
 
-experimental:
-  notify:
-    branches:
-      only:
-        - master
-        - release
+  publish:
+    docker: *docker_image
+    environment:
+    steps:
+      - checkout
+      - run: *update_path
+      - restore_cache: *restore_npm_cache
+      - run: *npm_install
+      - run:
+          name: Publish to NPM
+          command: |
+            export NPM_TOKEN=${NPM_PUBLISH_TOKEN}
+            npm publish --unsafe-perm
+
+workflows:
+  version: 2
+  build-and-publish:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+      - publish:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/

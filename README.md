@@ -1,4 +1,4 @@
-# grunt-crowdin
+# @peakon/grunt-crowdin
 
 Task to upload and download translations from [Crowdin](https://crowdin.com). The translation files must be in json format.
 
