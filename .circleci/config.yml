@@ -76,3 +76,10 @@ workflows:
               only: /^v.*/
             branches:
               ignore: /.*/
+
+experimental:
+  notify:
+    branches:
+      only:
+        - master
+        - release
