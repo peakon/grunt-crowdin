@@ -2,15 +2,19 @@
   "name": "@peakon/grunt-crowdin",
   "version": "1.2.3",
   "description": "Update and export translations from Crowdin",
-  "author": {
-    "name": "Peakon Team",
-    "url": "http://peakon.com/"
-  },
   "scripts": {
-    "test": "grunt eslint"
+    "lint": "grunt eslint"
   },
-  "repository": "peakon/grunt-crowdin",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peakon/grunt-crowdin.git"
+  },
+  "author": "Peakon",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/peakon/grunt-crowdin/issues"
+  },
+  "homepage": "https://github.com/peakon/grunt-crowdin#readme",
   "engines": {
     "node": ">=8.0.0"
   },
@@ -18,7 +22,7 @@
     "bluebird": "^3.5.1",
     "crowdin-api": "^2.0.3",
     "load-grunt-config": "^0.19.2",
-    "lodash": "^4.17.4",
+    "lodash": ">=4.17.11",
     "stream-buffers": "^3.0.1",
     "unzip": "git://github.com/dylanpiercey/unzip.git#83eb1c7689ce4a96bc1d846a5255b5de2b486ae2"
   },
