@@ -7,6 +7,7 @@ const unzip = require('unzip');
 const Bluebird = require('bluebird');
 const streamBuffers = require('stream-buffers');
 const _ = require('lodash');
+const prettyMaybe = require('pretty-maybe');
 
 function upload(api, project, localesFolder, filename, sourceLocale) {
   const options = {
@@ -50,7 +51,8 @@ async function download(api, project, localesFolder, filename, sourceLocale, map
             const updated = buffer.getContentsAsString('utf8');
             const merged = _.merge(JSON.parse(current), JSON.parse(updated));
 
-            await Bluebird.fromCallback(cb => fs.writeFile(targetFile, JSON.stringify(merged, null, '  ') + '\n', 'utf8', cb));
+            const jsonStr = prettyMaybe(targetFile, JSON.stringify(merged, null, '  ') + '\n');
+            await Bluebird.fromCallback(cb => fs.writeFile(targetFile, jsonStr, 'utf8', cb));
           })
             .pipe(buffer);
         } else {
