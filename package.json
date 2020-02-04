@@ -23,7 +23,7 @@
     "crowdin-api": "^2.0.3",
     "load-grunt-config": "^0.19.2",
     "lodash": ">=4.17.11",
-    "pretty-maybe": "^1.0.0",
+    "pretty-maybe": "^1.1.0",
     "stream-buffers": "^3.0.1",
     "unzip": "git://github.com/dylanpiercey/unzip.git#83eb1c7689ce4a96bc1d846a5255b5de2b486ae2"
   },
