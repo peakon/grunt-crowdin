@@ -51,8 +51,7 @@ async function download(api, project, localesFolder, filename, sourceLocale, map
             const updated = buffer.getContentsAsString('utf8');
             const merged = _.merge(JSON.parse(current), JSON.parse(updated));
 
-            const jsonStr = await prettyMaybe(targetFile, JSON.stringify(merged, null, '  ') + '\n');
-            await Bluebird.fromCallback(cb => fs.writeFile(targetFile, jsonStr, 'utf8', cb));
+            await prettyMaybe.writeFile(targetFile, JSON.stringify(merged, null, '  ') + '\n');
           })
             .pipe(buffer);
         } else {
