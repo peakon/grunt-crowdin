@@ -1,6 +1,6 @@
 {
   "name": "@peakon/grunt-crowdin",
-  "version": "1.2.4",
+  "version": "1.3.0",
   "description": "Update and export translations from Crowdin",
   "scripts": {
     "lint": "grunt eslint"
