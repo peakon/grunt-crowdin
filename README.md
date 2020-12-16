@@ -1,4 +1,6 @@
 # @peakon/grunt-crowdin
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fpeakon%2Fgrunt-crowdin.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fpeakon%2Fgrunt-crowdin?ref=badge_shield)
+
 
 Task to upload and download translations from [Crowdin](https://crowdin.com). The translation files must be in json format.
 
@@ -55,3 +57,7 @@ travis-crowdin: {
     sourceLocale: 'en'
 }
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fpeakon%2Fgrunt-crowdin.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fpeakon%2Fgrunt-crowdin?ref=badge_large)
